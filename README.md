@@ -1,79 +1,248 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+## 项目概述
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+本项目是一个网络记事本的后端API项目，使用Laravel6.0开发。
 
-## About Laravel
+## 功能如下
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 用户中心 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- 注册
+- 登录
+- 退出
+- 密码找回
+- 支持登录用户和游客用户
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 节点操作
 
-## Learning Laravel
+- 显示网站内容
+- 添加子节点
+- 获取父节点下的所有子节点
+- 更新子节点类容
+- 删除子节点
+-  更新菜单内容
+- 移动节点
+- 修改菜单排序
+- 修改节点排序
+- 添加父节点
+- 删除父节点
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 运行环境要求
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 7.2+
 
-## Laravel Sponsors
+## 开发环境部署
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+对于环境部署，没有特殊要求，因人而异。推荐LNMP环境下部署。
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+### 操作步骤
 
-## Contributing
+1. 克隆代码
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+   ```shell
+   git clone https://github.com/tsmliyun/note_api.git
+   ```
 
-## Code of Conduct
+2. 安装扩展包依赖
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+   ```php
+   composer install
+   ```
 
-## Security Vulnerabilities
+3. 生成配置文件
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+   ```shell
+   cp .env.example .env
+   ```
 
-## License
+   你可以根据情况修改 `.env` 文件里的内容，如数据库连接、缓存、邮件设置等：
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# note_api
+4. 生成密钥
+
+   ```php
+   php artisan key:generate
+   ```
+
+## 数据表说明
+
+本项目涉及到三张表，结构如下
+
+```mysql
+-- 原项目的表
+-- 菜单表
+CREATE TABLE `pre_xiaomy_cus_todo_menu` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `pid` int(10) NOT NULL DEFAULT '0',
+  `uid` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `username` varchar(30) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `name` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `orderid` int(10) DEFAULT '0',
+  `type` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1登录用户 2 游客',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 原项目的表
+-- 节点表
+CREATE TABLE `pre_xiaomy_cus_todo_item` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `pid` int(10) NOT NULL DEFAULT '0',
+  `mid` int(10) NOT NULL DEFAULT '0',
+  `uid` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `username` varchar(30) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `zindex` int(10) NOT NULL,
+  `content` text CHARACTER SET utf8 NOT NULL,
+  `dateline` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 新建的表
+-- 用户表
+CREATE TABLE `pre_xiaomy_cus_todo_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(32) NOT NULL DEFAULT '' COMMENT '登陆的用户名',
+  `email` varchar(32) NOT NULL DEFAULT '' COMMENT 'email',
+  `phone` char(11) NOT NULL DEFAULT '' COMMENT '电话号码',
+  `password` char(60) NOT NULL DEFAULT '' COMMENT '密码',
+  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1 => 启用 0=>禁用',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_email` (`email`) USING BTREE,
+  KEY `idx_username` (`username`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
+```
+
+## 接口说明
+
+老的接口在原文档已经存在，这里列举的是新增接口的文档。
+
+对于登录用户，头部需要带上鉴权认证。
+
+### 请求头部
+
+| 参数名        | 类型   | 是否必须 | 示例         | 备注                                   |
+| ------------- | ------ | -------- | ------------ | -------------------------------------- |
+| Authorization | string | N        | 登陆接口返回 | 身份认证，Bearer + 登录接口返回的token |
+
+### 注册
+
+| 路由地址          | 请求方式 |
+| ----------------- | -------- |
+| api/auth/register | POST     |
+
+#### 请求报文
+
+| 字段名                | 类型   | 是否必填 | 描述                   | 示例值   |
+| --------------------- | ------ | -------- | ---------------------- | -------- |
+| username              | String | Y        | 当前页码               | test     |
+| password              | String | Y        | 每页大小，最大不超过50 | 12345678 |
+| password_confirmation | String | Y        | 更新时间 开始值        | 12345678 |
+
+```json
+{
+	"username":"test",
+	"password":"12345678",
+	"password_confirmation":"12345678"
+}
+```
+
+#### 响应报文
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": {}
+}
+```
+
+
+
+### 登录
+
+| 路由地址       | 请求方式 |
+| -------------- | -------- |
+| api/auth/login | POST     |
+
+#### 请求报文
+
+| 字段名   | 类型   | 是否必填 | 描述     | 示例值 |
+| -------- | ------ | -------- | -------- | ------ |
+| username | String | Y        | test     |        |
+| password | String | Y        | 12345678 |        |
+
+```json
+{
+	"username":"liyun",
+	"password":"1234"
+}
+```
+
+#### 响应报文
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": {
+        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9ub3RlX2FwaS5sb2NhbC5jb21cL2FwaVwvYXV0aFwvbG9naW4iLCJpYXQiOjE1ODY1MjU4MjcsImV4cCI6MTU4NzM4OTgyNywibmJmIjoxNTg2NTI1ODI3LCJqdGkiOiJhTFlyeVJZVGFtOGRBSmduIiwic3ViIjoxLCJwcnYiOiI0MWRmODgzNGYxYjk4ZjcwZWZhNjBhYWVkZWY0MjM0MTM3MDA2OTBjIn0.5mBImg7gMYd-MM5RCYy7JCQFFDvqGLuqspoQti8OrBE",
+        "token_type": "bearer",
+        "expires_in": 864000
+    }
+}
+```
+
+
+
+### 退出
+
+| 路由地址        | 请求方式 |
+| --------------- | -------- |
+| api/auth/logout | POST     |
+
+#### 请求报文
+
+略
+
+#### 响应报文
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": {}
+}
+```
+
+### 获取UUID
+
+| 路由地址          | 请求方式 |
+| ----------------- | -------- |
+| api/auth/makeUuid | POST     |
+
+#### 请求报文
+
+略
+
+#### 响应报文
+
+```json
+{
+    "code": 200,
+    "msg": "ok",
+    "data": {
+        "uuid": "595e5228-f75a-43de-ba92-6bdedfbc4707"
+    }
+}
+```
+
+
+
+## 其他说明
+
+### 如何区分游客和登录用户
+
+1. 头部传递uuid，且uuid的值不为空时，系统认为是游客访问，uuid是游客身份的唯一标识;
+2. 头部传递 Authorization时，则认为是登录用户访问；Authorization的值为Bearer + token，token为登录接口返回的token值；
+3. 当uuid和Authorization都传值时,uuid优先级更高；
+4. uuid为后端接口返回，前端存储在本地；当无uuid时才请求后端接口获取uuid。
