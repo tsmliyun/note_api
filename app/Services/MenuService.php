@@ -105,7 +105,7 @@ class MenuService extends BaseService
      * @param int $userId
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
      */
-    public function getUserById(int $userId)
+    public function getUserById($userId)
     {
         if (empty($userId)) {
             return null;
