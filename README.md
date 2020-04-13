@@ -145,9 +145,9 @@ api_url + 路由地址
 
 | 字段名                | 类型   | 是否必填 | 描述                   | 示例值   |
 | --------------------- | ------ | -------- | ---------------------- | -------- |
-| username              | String | Y        | 当前页码               | test     |
-| password              | String | Y        | 每页大小，最大不超过50 | 12345678 |
-| password_confirmation | String | Y        | 更新时间 开始值        | 12345678 |
+| username              | String | Y        | 用户名               | test     |
+| password              | String | Y        | 密码 | 12345678 |
+| password_confirmation | String | Y        | 确认密码        | 12345678 |
 | email                 | String | Y        | 邮箱                   |          |
 | phone                 | String | N        | 电话                   |          |
 
